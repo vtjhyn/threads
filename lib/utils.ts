@@ -14,22 +14,25 @@ export function isBase64Image(imageData: string) {
 
 // created by chatgpt
 export function formatDateString(dateString: string) {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "short",
+  const optionsTime: Intl.DateTimeFormatOptions = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  };
+
+  const optionsDate: Intl.DateTimeFormatOptions = {
     day: "numeric",
+    month: "short",
+    year: "numeric",
   };
 
   const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString(undefined, options);
+  const formattedTime = date.toLocaleTimeString(undefined, optionsTime);
+  const formattedDate = date.toLocaleDateString(undefined, optionsDate);
 
-  const time = date.toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit",
-  });
-
-  return `${time} - ${formattedDate}`;
+  return `${formattedTime} - ${formattedDate}`;
 }
+
 
 // created by chatgpt
 export function formatThreadCount(count: number): string {
